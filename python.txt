@@ -1,0 +1,161 @@
+#Task 1 - Robert Colan-O'Leary - R00090721
+
+def main():
+	newNumbers = []
+	count = 0
+	numOfEntries = 12
+	
+	print("------\nTask 1\n------\nCreate a list of 12 integer Values: e.g. 25\n")
+	
+	'''while loop to control number of entries excepted
+	into the newNumbers List'''
+	while len(newNumbers) < numOfEntries:
+		#loop used to validate input to be an int value
+		while True:
+			try:
+				number = int(input("Entry number " + str(count + 1) + " on the number List:"))
+			except ValueError:
+				print("Please enter a valid number: e.g. 17")
+				continue
+			else:
+				newNumbers = newNumbers + [number]
+				count += 1
+				break
+	
+	print("\nYour completed List looks like this: " + str(newNumbers) + "\n")
+	
+	'''Place another while loop here for the exit and choices
+	for a menu, b or B to select the largest number, s or S for
+	the smallest number and any numeric value to call the
+	replicate function and finally e or E to exit the program
+	with a goodbye message'''
+	while True:
+		print('---------------------------------------------------------------')
+		print('Select from the following options:\n')
+		print('\tType "B" or "b" for the biggest number in the list.')
+		print('\tType "S" or "s" for the smallect number in the list.')
+		print('\tType any integer value to replicate the List. e.g. 3')
+		print('\tType "E" or "e" to Exit the program.')
+		print('---------------------------------------------------------------')
+		response = input()
+		if response.lower() == 'e':
+			print('Thank you for using the program. Goodbye!')
+			break
+		elif response.lower() == 'b':
+			print('Input = ' + response)
+			getBiggest(newNumbers)
+		elif response.lower() == 's':
+			print('Input = ' + response)
+			getSmallest(newNumbers)
+		elif response.isdigit():
+			print('Input = ' + response)
+			replicate(newNumbers)
+		else:
+			print('\nPlease enter a valid input from the options available\n')
+
+def getBiggest(numbers):
+	maxValue = max(numbers)
+	print(str(maxValue) + " is the Biggest number in the List")
+
+def getSmallest(numbers):
+	print(str(min(numbers)) + " is the Smallest number in the List")
+
+'''Ask about replication and if list is to be changed every time
+an int value is entered, original list is always changed or 
+a new copy created and that to be edited'''
+def replicate(numbers):
+	numbers *= 3
+	print("List has been replicated by 3 giving the following")
+	print(numbers)
+	print("The number of entries on the new list is " + str(len(numbers)))
+	print("Odd numbers in the new List are:")
+	for i in range(len(numbers)):
+		if numbers[i] % 2 == 1:
+			print(numbers[i])
+			
+main()
+
+
+
+#Task 2 - Robert Colan-O'Leary - R00090721
+
+'''Ask the user for a valid integer value to run the reducer on
+if the user inputs an invallid entry output a message displaying
+an example'''
+def main():
+	evenNumber = 16
+	oddNumber = 17
+	count = 0
+	
+	print("\nIf integer value is even: " + str(evenNumber) + "\nThe reducer will divide the number by 2: " + str(reducer(evenNumber)))
+	print("\nIf integer value is odd: " + str(oddNumber) + "\nThe reducer will multiply the number by 3 and add 1: " + str(reducer(oddNumber)))
+	
+	while True:
+		try:
+			number = int(input("\nEnter integer value to see how the reducer call gets to 1: "))
+		except ValueError:
+			print("Please enter a valid number: e.g. 17")
+			continue
+		else:
+				break
+	#reducer(number)
+	'''Not sure if you use this while loop ask Vincent if reducer is
+	used recrusivelyin main or within reducer function'''
+	while number >= 2:
+		print(number)
+		number = reducer(number)
+		count += 1
+		
+	if number == 1:
+		print("Base number reached in: " + str(count) + " turns")
+		
+
+'''Reducer will recrusively call until number has been reduced to 
+1, at which point it will output a message that the base number
+has been reached'''
+#Above has been changed so reducer will just do calculations
+def reducer(number):
+	if number == 1:
+		print("Base number reached:")
+	elif number % 2 == 0:
+		number = int(number / 2)
+		#print(number)
+		#number = reducer(number)
+	else:
+		number = int((number * 3) + 1)
+		#print(number)
+		#number = reducer(number)
+	return int(number)
+	
+main()
+
+Q4
+=============
+sentenceInput=""
+sentence=""
+def changeWord(sentence, word, replacement):
+       
+        while True:
+                try:
+                        indexOfWord = sentence.index(word)
+                except ValueError:
+                        print("Word1 not found in sentence.\nPlease try again.")
+                        word = input()
+                        indexOfWord = sentence.index(word)
+                break
+        
+        newSentence = sentence[0:indexOfWord]+replacement+sentence[indexOfWord+len(word):len(sentence)]
+        print("Original sentence: "+sentence)
+        print("Changed sentence: "+newSentence)
+
+
+print("You will be asked to enter three things: a sentence, a word and a replacement.")
+print("Please enter a sentence:")
+
+sentence = input()
+print("Please enter word 1:")
+word = input()
+print("Please enter word2 to replace the "+word+" word")
+replacement = input()
+changeWord(sentence, word, replacement)
+
